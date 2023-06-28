@@ -2,7 +2,7 @@
 
 This program uses publicly accessible air quality data to predict and display air quality levels. It also allows users to select the air quality sensor they want to monitor and customize the look and feel of the GUI.
 
-## Requirements
+# Requirements
 
 * Python 3.6+
 * NumPy
@@ -13,7 +13,7 @@ This program uses publicly accessible air quality data to predict and display ai
 * CSS
 * JavaScript
 
-## Installation
+# Installation
 
 
 pip install -r requirements.txt
@@ -25,7 +25,7 @@ pip install -r requirements.txt
 python air_quality.py
 
 
-## Features
+# Features
 
 * Predicts air quality levels using a variety of machine learning models.
 * Displays a history of air quality levels.
@@ -33,16 +33,16 @@ python air_quality.py
 * Allows users to select the air quality sensor they want to monitor.
 * Allows users to customize the look and feel of the GUI.
 
-## Additional Information
+# Additional Information
 
 * The data sources used are the OpenAQ API and the AirNow API.
 * The methodology for predicting air quality levels is a combination of machine learning models and statistical analysis.
 * The limitations of the program include the accuracy of the data sources, the complexity of the machine learning models, and the limited customization options.
 
-## Contributing
+# Contributing
 
 Contributions are welcome! Please open a pull request on GitHub.
 
-## License
+# License
 
 This project is licensed under the MIT License.
