@@ -17,11 +17,11 @@ This program uses publicly accessible air quality data to predict and display ai
 
 
 pip install -r requirements.txt
-```
 
-## Usage
 
-```
+# Usage
+
+
 python air_quality.py
 
 
