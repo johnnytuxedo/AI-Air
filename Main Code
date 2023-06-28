@@ -1,0 +1,103 @@
+import requests
+import json
+import numpy as np
+import matplotlib.pyplot as plt
+import html, css, js
+
+# Get air quality data from publicly accessible sensors
+url = "https://api.openaq.org/v1/measurements"
+params = {
+    "parameter": "PM2.5",
+    "limit": 100,
+}
+response = requests.get(url, params=params)
+data = json.loads(response.content)
+
+# Use a variety of machine learning models to predict air quality levels
+models = [
+    np.load("model_1.npz"),
+    np.load("model_2.npz"),
+    np.load("model_3.npz"),
+]
+predictions = []
+for model in models:
+    predictions.append(model.predict(data["values"]))
+
+# Display a history of air quality levels
+history = []
+for i in range(len(data["values"])):
+    history.append({
+        "timestamp": data["timestamps"][i],
+        "level": predictions[0][i],
+    })
+
+# Display a forecast of air quality levels
+forecast = []
+for i in range(10):
+    forecast.append({
+        "timestamp": data["timestamps"][-1] + i * 60 * 60,
+        "level": predictions[0][-1],
+    })
+
+# Allow users to select the air quality sensor they want to monitor
+sensor_id = input("Enter the sensor ID: ")
+
+# Allow users to customize the look and feel of the GUI
+css = """
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  font-family: serif;
+}
+
+p {
+  margin: 0 0 1em 0;
+}
+
+.container {
+  width: 500px;
+  background-color: lightblue;
+}
+
+.button {
+  background-color: darkblue;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+"""
+js = """
+var airQuality = {
+  "level": predictions[0][0],
+  "history": history,
+  "forecast": forecast,
+};
+
+var progressBar = document.getElementById("progress-bar");
+
+function updateAirQuality() {
+  document.getElementById("air_quality").innerHTML = airQuality.level;
+  progressBar.value = airQuality.level / 5;
+}
+
+setInterval(updateAirQuality, 1000);
+
+# Create a graph of the air quality levels
+def make_graph_visually_appealing():
+    plt.plot([x["timestamp"] for x in history], [x["level"] for x in history], color="blue")
+    plt.title("Air Quality Levels", color="black")
+    plt.xlabel("Timestamp", color="black")
+    plt.ylabel("PM2.5 Level", color="black")
+    plt.grid(color="gray")
+
+if __name__ == "__main__":
