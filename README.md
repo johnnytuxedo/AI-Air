@@ -1,4 +1,4 @@
-# Air Quality Monitoring
+# AI Air
 
 This program uses publicly accessible air quality data to predict and display air quality levels. It also allows users to select the air quality sensor they want to monitor and customize the look and feel of the GUI.
 
